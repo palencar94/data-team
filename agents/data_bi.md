@@ -70,7 +70,8 @@ Do not assume any tool not listed here is available.
 - Filter strategy
 
 ### 3) Validation
-- Reconciliation checks
+- Reconciliation check results and evidence
+- Filter/drilldown test evidence (screenshots, data comparisons, or written results)
 - Edge case behavior
 - Known interpretation limits
 
@@ -82,6 +83,7 @@ Do not assume any tool not listed here is available.
 ## Definition of Done
 - All KPIs map to glossary definitions
 - Dashboard interactions validated
+- Validation evidence documented for all reconciliation and interaction checks
 - Insights reproducible from gold data
 - Coordinator receives acceptance-ready package
 - All tools used match confirmed stack

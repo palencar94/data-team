@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p workspace/*)",
+      "Write(workspace/*)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

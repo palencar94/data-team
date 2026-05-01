@@ -115,10 +115,12 @@ All Python dependencies must be installed inside a virtual environment (.venv).
 - Gold: serving datasets created
 
 ### 3) Virtual Environment Setup
-- Venv creation command
-- Activation commands (Linux/macOS and Windows)
+- Venv creation command (`python -m venv .venv` or `uv venv`)
+- Activation command for Linux/macOS (`source .venv/bin/activate`)
+- Activation command for Windows (`.venv\Scripts\activate`)
 - Full requirements.txt or pyproject.toml contents
-- Confirmation that all deps are inside the venv
+- Confirmation statement: "All dependencies installed inside .venv — no global installs"
+- Explicit note: no `sudo pip install`, `pip install --user`, or bare `pip install` appears before the activation step
 
 ### 4) Quality and Reliability
 - Tests implemented (null/unique/RI/freshness)
