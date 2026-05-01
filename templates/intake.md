@@ -21,7 +21,7 @@
 - <item>
 
 ## Time Window
-<dates, historical range, update cadence>
+<analysis period start/end, historical range needed>
 
 ## Data Characteristics
 - Estimated volume (rows/day):
@@ -30,15 +30,15 @@
 - Historical range needed:
 
 ## SLA Requirements
-- Freshness SLA (max acceptable data latency):
-- Availability requirement (uptime %):
-- Recovery time objective (RTO):
+- Freshness SLA (max acceptable delay between source update and data being queryable):
+- Availability requirement (uptime % for the serving/dashboard layer, or "N/A" for batch/ad-hoc):
+- Recovery time objective (max time to restore pipeline after failure, or "N/A"):
 
 ## Infrastructure Context
 - Existing infrastructure (list tools already in use, or "none"):
 - Budget sensitivity (cost matters a lot / somewhat / not at all):
 - Team technology familiarity (languages and tools the team knows):
-- Deployment environment (local machine / on-prem server / cloud-agnostic):
+- Deployment environment (local machine / on-prem server / self-managed cloud VM / cloud-managed services):
 
 ## Constraints
 - Privacy/compliance:
@@ -54,5 +54,5 @@
 - <role/name>
 
 ## Tech Stack
-> Filled by Coordinator after Phase 1 (Stack Selection) — do not fill manually.
-- Confirmed stack: <populated from stack/confirmed_stack.md>
+> DO NOT FILL — Coordinator writes this field automatically at the end of Phase 1. Leave the line below unchanged during Phase 0 intake.
+- Confirmed stack: PENDING_PHASE_1
