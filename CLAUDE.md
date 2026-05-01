@@ -20,7 +20,7 @@ When the user types `/data-request [description]`, load `agents/coordinator.md` 
 ## Operating Rules
 
 1. Never bypass the intake confirmation step — always present the filled `intake.md` to the human and wait for approval before proceeding.
-2. Never dispatch a subagent without first writing all prior stage artifacts to the workspace.
+2. Never dispatch a subagent for a phase without first writing all artifacts produced in the preceding phase to the workspace.
 3. Always report gate results (PASS or FAIL with specific reasons) before taking any action on them.
 4. `workspace/<request-id>/` is the only shared state between agents — never pass artifacts through conversation context alone.
 5. All tools in every recommended stack must be open-source. See `standards/tech_constraints.md`.
