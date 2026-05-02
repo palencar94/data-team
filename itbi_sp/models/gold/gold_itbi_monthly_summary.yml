@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: gold_itbi_monthly_summary
+    description: "Monthly aggregates for city-wide ITBI transactions. Contract v1.0."
+    columns:
+      - name: monthly_summary_id
+        tests:
+          - not_null
+          - unique
+      - name: month_year
+        tests:
+          - not_null
+      - name: transaction_count
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 1"
+      - name: kpi_median_price
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0 OR kpi_median_price IS NULL"
+      - name: kpi_median_price_per_m2
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0 OR kpi_median_price_per_m2 IS NULL"

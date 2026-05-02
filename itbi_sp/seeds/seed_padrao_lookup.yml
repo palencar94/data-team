@@ -1,0 +1,13 @@
+version: 2
+
+seeds:
+  - name: seed_padrao_lookup
+    description: "IPTU construction standard code to canonical description lookup."
+    columns:
+      - name: padrao_codigo
+        tests:
+          - not_null
+          - unique
+      - name: padrao_descricao_canonical
+        tests:
+          - not_null

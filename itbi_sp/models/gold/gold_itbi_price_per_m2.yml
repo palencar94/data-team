@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: gold_itbi_price_per_m2
+    description: "Per-neighborhood per-use-type per-month price/m² aggregates. Contract v1.0."
+    columns:
+      - name: price_m2_id
+        tests:
+          - not_null
+          - unique
+      - name: bairro_normalized
+        tests:
+          - not_null
+      - name: uso_desc
+        tests:
+          - not_null
+      - name: month_year
+        tests:
+          - not_null
+          - relationships:
+              to: ref('gold_itbi_monthly_summary')
+              field: month_year
+              severity: warn
+      - name: transaction_count
+        tests:
+          - not_null
+      - name: kpi_median_price_per_m2
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+              severity: warn

@@ -1,0 +1,29 @@
+name: 'itbi_sp'
+version: '1.0.0'
+config-version: 2
+
+profile: 'itbi_sp'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+seeds:
+  itbi_sp:
+    seed_uso_lookup:
+      +column_types:
+        uso_codigo: varchar
+    seed_padrao_lookup:
+      +column_types:
+        padrao_codigo: varchar
+
+models:
+  itbi_sp:
+    bronze:
+      +materialized: view
+    silver:
+      +materialized: table
+    gold:
+      +materialized: table

@@ -1,0 +1,28 @@
+# ITBI SP Dashboard Pipeline
+# Python 3.11.x required
+# All packages install inside .venv — no global installs
+
+# dbt core + DuckDB adapter
+dbt-core>=1.7.0,<2.0.0
+dbt-duckdb>=1.7.0,<2.0.0
+
+# Streamlit dashboard
+streamlit>=1.32.0,<2.0.0
+
+# Data quality
+soda-core>=3.0.0,<4.0.0
+soda-core-duckdb>=3.0.0,<4.0.0
+
+# Ingestion
+openpyxl>=3.1.0,<4.0.0
+
+# DuckDB Python driver
+duckdb>=0.10.0,<2.0.0
+
+# Environment management
+python-dotenv>=1.0.0,<2.0.0
+
+# Utilities
+pandas>=2.0.0,<3.0.0
+pyarrow>=14.0.0,<18.0.0
+plotly>=5.18.0,<6.0.0

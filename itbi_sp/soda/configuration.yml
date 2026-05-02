@@ -1,0 +1,3 @@
+data_source itbi_duckdb:
+  type: duckdb
+  path: ${DB_PATH}

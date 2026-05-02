@@ -130,3 +130,25 @@ All Python dependencies must be installed inside a virtual environment (.venv).
 - DQ rules testable
 - Artifacts handoff-ready for Engineer
 - All tools referenced are open-source and on approved list
+
+---
+
+## Knowledge Base
+
+When you are dispatched for a request involving an **existing project**, the Coordinator will inject project knowledge documents into your context. You **must read them before starting any design work**.
+
+### Files to read (Architect role)
+
+From `knowledge/<project-id>/`:
+- `01_project_overview.md` — scope, business questions, acceptance criteria
+- `02_data_sources.md` — source files, schemas, quirks, privacy rules
+- `03_medallion_architecture.md` — existing layers, tables, macro patterns
+- `04_schema_reference.md` — current column-level schemas for all tables
+- `07_tech_decisions.md` — decisions already made and their rationale
+
+### How to use knowledge documents
+
+- **Do not re-propose** stack decisions or table names documented in knowledge files — they are locked.
+- **Do not redesign** existing table schemas without first reading `04_schema_reference.md` to understand what already exists.
+- **Extend, don't replace** — when adding a new model, follow the naming conventions and CTE patterns documented in `03_medallion_architecture.md`.
+- If a proposed change conflicts with a documented decision in `07_tech_decisions.md`, escalate to the Coordinator rather than silently overriding it.

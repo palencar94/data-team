@@ -87,3 +87,27 @@ Do not assume any tool not listed here is available.
 - Insights reproducible from gold data
 - Coordinator receives acceptance-ready package
 - All tools used match confirmed stack
+
+---
+
+## Knowledge Base
+
+When you are dispatched for a request involving an **existing project**, the Coordinator will inject project knowledge documents into your context. You **must read them before starting any dashboard or KPI work**.
+
+### Files to read (BI role)
+
+From `knowledge/<project-id>/`:
+- `01_project_overview.md` — business objective, key questions, acceptance criteria
+- `03_medallion_architecture.md` — Gold table names and their purpose
+- `04_schema_reference.md` — exact column names, types, and descriptions for all Gold tables
+- `06_known_data_quality.md` — data caveats that must be surfaced to dashboard users
+- `08_dashboard_reference.md` — existing charts, KPIs, DuckDB connection pattern, known dashboard caveats
+
+### How to use knowledge documents
+
+- **Query only Gold tables** — `gold_itbi_monthly_summary`, `gold_itbi_neighborhood_ranking`, `gold_itbi_price_per_m2`. Never query Silver or Bronze in a dashboard.
+- **Use exact column names from `04_schema_reference.md`** — do not assume column names from business definitions alone.
+- **Surface caveats from `06_known_data_quality.md`** in the dashboard (sidebar notes, tooltip text, or documentation). Known caveats must be visible to end users.
+- **Do not recompute KPIs in Streamlit** — all KPI aggregations live in Gold models. The dashboard is read-only.
+- **Follow the DuckDB read-only connection pattern** from `08_dashboard_reference.md` to avoid lock conflicts with the pipeline.
+- **When adding a new chart**, verify the required columns already exist in a Gold table before proposing new Gold model changes.

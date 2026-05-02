@@ -1,0 +1,13 @@
+version: 2
+
+seeds:
+  - name: seed_uso_lookup
+    description: "IPTU use code to canonical description lookup."
+    columns:
+      - name: uso_codigo
+        tests:
+          - not_null
+          - unique
+      - name: uso_descricao_canonical
+        tests:
+          - not_null

@@ -1,0 +1,33 @@
+checks for raw_itbi_transactions:
+
+  - freshness(ingested_at) < 35d:
+      name: monthly_load_freshness
+      warn: when > 30d
+      fail: when > 35d
+
+  - row_count > 0:
+      name: non_empty_table
+
+  - row_count > 100:
+      name: min_rows_per_sheet
+      filter: source_sheet IS NOT NULL
+
+  - missing_count(sql_cadastro) = 0:
+      name: sql_cadastro_not_null
+  - missing_count(bairro):
+      name: bairro_not_null
+      warn: when > 0
+  - missing_count(natureza_transacao) = 0:
+      name: natureza_transacao_not_null
+  - missing_count(valor_transacao) = 0:
+      name: valor_transacao_not_null
+  - missing_count(data_transacao) = 0:
+      name: data_transacao_not_null
+  - missing_count(source_sheet) = 0:
+      name: source_sheet_not_null
+  - missing_count(ingested_at) = 0:
+      name: ingested_at_not_null
+
+  - duplicate_count(sql_cadastro, data_transacao, valor_transacao, source_sheet):
+      name: bronze_composite_key_unique
+      warn: when > 0

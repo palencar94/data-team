@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: gold_itbi_neighborhood_ranking
+    description: "Per-neighborhood per-month aggregates with MoM KPIs. Contract v1.0."
+    columns:
+      - name: neighborhood_month_id
+        tests:
+          - not_null
+          - unique
+      - name: bairro_normalized
+        tests:
+          - not_null
+      - name: month_year
+        tests:
+          - not_null
+          - relationships:
+              to: ref('gold_itbi_monthly_summary')
+              field: month_year
+              severity: warn
+      - name: transaction_count
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 1"
+      - name: kpi_mom_price_change_pct
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "BETWEEN -100 AND 500 OR kpi_mom_price_change_pct IS NULL"
+              severity: warn

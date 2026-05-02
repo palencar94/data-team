@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: bronze_itbi_transactions
+    description: "Raw ITBI transaction data ingested from XLSX by scripts/ingest.py. All columns VARCHAR. Contract v1.0."
+    columns:
+      - name: sql_cadastro
+        description: "Property cadastral number (SQL)"
+      - name: source_sheet
+        description: "Source XLSX sheet name (e.g. JAN-2026)"
+      - name: ingested_at
+        description: "UTC timestamp of ingestion"

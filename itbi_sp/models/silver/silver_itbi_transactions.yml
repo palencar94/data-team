@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: silver_itbi_transactions
+    description: "Typed, normalized, and deduplicated ITBI transactions. Contract v1.0."
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique:
+              severity: warn
+      - name: sql_cadastro
+        tests:
+          - not_null
+      - name: bairro_raw
+        tests:
+          - not_null:
+              severity: warn
+      - name: bairro_from_cep
+        description: "Bairro resolved via CEP lookup (cep_sp.csv). NULL when CEP is absent or unmatched."
+      - name: bairro_normalized
+        tests:
+          - not_null
+      - name: valor_transacao
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+      - name: data_transacao
+        tests:
+          - not_null
+      - name: month_year
+        tests:
+          - not_null
+      - name: source_sheet
+        tests:
+          - not_null
+      - name: ingested_at
+        tests:
+          - not_null
+      - name: area_construida_m2
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0 OR area_construida_m2 IS NULL"
+      - name: price_per_m2
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0 OR price_per_m2 IS NULL"
+              severity: warn
+      - name: proporcao_transmitida_pct
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "BETWEEN 0 AND 100 OR proporcao_transmitida_pct IS NULL"
+              severity: warn
+      - name: acc_iptu
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "BETWEEN 1500 AND 2030 OR acc_iptu IS NULL"
+      - name: uso_codigo
+        tests:
+          - relationships:
+              to: ref('seed_uso_lookup')
+              field: uso_codigo
+              severity: warn
+      - name: padrao_codigo
+        tests:
+          - relationships:
+              to: ref('seed_padrao_lookup')
+              field: padrao_codigo
+              severity: warn

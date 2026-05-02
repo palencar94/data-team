@@ -1,0 +1,8 @@
+checks for raw_itbi_transactions:
+  - schema:
+      name: privacy_columns_absent
+      fail:
+        when required column missing: []
+        when forbidden column present:
+          - cartorio_de_registro
+          - matricula_do_imovel

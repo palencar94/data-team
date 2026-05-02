@@ -144,3 +144,28 @@ All Python dependencies must be installed inside a virtual environment (.venv).
 - Virtual environment setup documented with creation, activation, and dependency file
 - Confirmation statement present that all deps are inside the venv
 - All tools match confirmed stack
+
+---
+
+## Knowledge Base
+
+When you are dispatched for a request involving an **existing project**, the Coordinator will inject project knowledge documents into your context. You **must read them before starting any implementation work**.
+
+### Files to read (Engineer role)
+
+From `knowledge/<project-id>/`:
+- `02_data_sources.md` — source file paths, formats, quirks, CEP format issues, privacy columns
+- `03_medallion_architecture.md` — existing pipeline structure, all table names, CTE patterns, macro names
+- `04_schema_reference.md` — current column-level schemas — know what already exists before adding anything
+- `05_pipeline_runbook.md` — Makefile targets, environment setup, DuckDB concurrency warning
+- `06_known_data_quality.md` — documented DQ issues and their resolution — do not re-raise these as new bugs
+- `07_tech_decisions.md` — implementation decisions: CEP LPAD, table naming, Soda exit codes, Python 3.9 compat, dbt-utils test format
+
+### How to use knowledge documents
+
+- **Do not rewrite** existing scripts or models that are documented as working — extend them.
+- **Respect TD-006** (Python 3.9) — no `str | None` type hints, no walrus operator, no `match` statements.
+- **Respect TD-003** (raw_ prefix) — Python-populated tables are always `raw_*`; dbt Bronze views are `bronze_*`.
+- **Respect TD-002** (CEP LPAD) — always pad CEPs to 8 digits before joining with `raw_cep_lookup`.
+- **Do not mark DQ issues in `06_known_data_quality.md` as blocking failures** — they are documented, understood, and intentionally handled at warn severity.
+- **Stop Streamlit before running the pipeline** (TD-001 — DuckDB single-writer).

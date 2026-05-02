@@ -231,3 +231,33 @@ Outcome: [what happened next]
 - Stack uses only approved open-source tools from `standards/tech_constraints.md`
 - All known caveats are documented with owners
 - Final READY decision issued
+
+---
+
+## Knowledge Base
+
+The `knowledge/` directory contains project-specific knowledge documents for active projects. Read `knowledge/README.md` to understand the structure.
+
+### When to use it
+
+During **Phase 0 (Intake)**, check whether the new request relates to an existing project by looking for a matching sub-directory under `knowledge/` (e.g., `knowledge/itbi_sp/`). If a match exists:
+
+1. Read `knowledge/<project>/01_project_overview.md` to confirm the match.
+2. When dispatching each subagent, inject the relevant knowledge files from that project directory alongside the workspace artifacts.
+
+### What to inject per agent
+
+When dispatching for an **existing project**, append to every subagent context block:
+
+```
+## Project Knowledge
+The following knowledge documents describe the existing implementation.
+Read them before starting your work — they document decisions already made,
+schemas already deployed, and known pitfalls.
+
+[list the files appropriate to the agent's role per knowledge/README.md]
+```
+
+### Keeping knowledge current
+
+After any phase that modifies the data model, pipeline, or dashboard, update the relevant knowledge documents in `knowledge/<project>/`. Do not leave them stale.
